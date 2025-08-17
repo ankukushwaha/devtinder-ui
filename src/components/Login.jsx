@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux"
+import { addUser } from "../utils/UserSlice"
+import { BASE_URL } from "../utils/Constant";
 
 function Login({setImageUrl}) {
 
     const [email, setEmail] = useState("simran@gmail.com");
     const [password, setPassword] = useState("Simran@123");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     async function handleClick(){
         try{
-            const data = await fetch("http://localhost:3000/login", {
+            const data = await fetch(BASE_URL + "/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({email: email, password: password})
             });
             const result = await data.json();
             setImageUrl(result.imageUrl);
-            console.log(result);
+            dispatch(addUser(result));
+            return navigate("/feed");
         }
         catch(err){
             console.error(err.message);

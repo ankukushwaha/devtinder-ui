@@ -1,13 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-function Header({imageURL}) {
+function Header() {
+  const user = useSelector((store) => store.user);
+
   return (
     <>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">DevTinder</a>
         </div>
-        {imageURL && <div className="flex gap-2">
+        {user && user.imageUrl && <div className="flex gap-2 items-center">
+          <p >Welcome, {user.firstName}</p>
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -17,7 +21,7 @@ function Header({imageURL}) {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src={imageURL}
+                  src={user.imageUrl}
                 />
               </div>
             </div>
