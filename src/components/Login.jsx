@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { addUser } from "../utils/UserSlice"
 import { BASE_URL } from "../utils/Constant";
 
-function Login({setImageUrl}) {
+function Login() {
 
     const [email, setEmail] = useState("simran@gmail.com");
     const [password, setPassword] = useState("Simran@123");
@@ -16,10 +16,10 @@ function Login({setImageUrl}) {
             const data = await fetch(BASE_URL + "/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({email: email, password: password})
+                body: JSON.stringify({email: email, password: password}),
+                credentials: "include"
             });
             const result = await data.json();
-            setImageUrl(result.imageUrl);
             dispatch(addUser(result));
             return navigate("/feed");
         }
