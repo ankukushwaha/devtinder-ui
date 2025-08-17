@@ -1,9 +1,34 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { BASE_URL } from "../utils/Constant";
+import { removeUser } from "../utils/UserSlice";
 
 function Header() {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    try {
+      const response = await fetch(BASE_URL + "/logout", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include"
+      });
+
+      console.log(response);
+      if(!response.ok){
+        throw new Error("Error in loggin out!");
+      }
+
+      dispatch(removeUser());
+      navigate("/login");
+
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
 
   return (
     <>
@@ -40,7 +65,7 @@ function Header() {
                 <a>Settings</a>
               </li>
               <li>
-                <Link to={"/logout"}>Logout</Link>
+                <Link onClick={handleLogout}>Logout</Link>
               </li>
             </ul>
           </div>
