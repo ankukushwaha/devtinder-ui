@@ -17,9 +17,8 @@ function Header() {
         credentials: "include"
       });
 
-      console.log(response);
       if(!response.ok){
-        throw new Error("Error in loggin out!");
+        throw new Error("Error in logging out!");
       }
 
       dispatch(removeUser());
@@ -56,7 +55,7 @@ function Header() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to='/feed' className="justify-between">
+                <Link to='/profile' className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </Link>

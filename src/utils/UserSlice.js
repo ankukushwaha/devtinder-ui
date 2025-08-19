@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  value: 0,
-}
-
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: null,
   reducers: {
