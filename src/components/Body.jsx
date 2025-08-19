@@ -42,7 +42,7 @@ function Body(){
         <>
             <Header/>
             <Outlet /> 
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

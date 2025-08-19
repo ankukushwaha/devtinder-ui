@@ -12,6 +12,7 @@ function UserCard({user}) {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{user.firstName}</h2>
+        <p>{user.age}</p>
         <p>
           {user.about}
         </p>
