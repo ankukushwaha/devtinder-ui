@@ -6,45 +6,44 @@ import { BASE_URL } from "../utils/Constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/UserSlice";
 
-function Body(){
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const userFromStore = useSelector((store) => store.user);
-    const fetchProfile = async() => {
-        try{
-            const user = await fetch(BASE_URL + "/profile/view", {
-                method: "GET",
-                headers: {"Content-Type": "application/json"},
-                credentials: "include"
-            });
+function Body({ alertMessage, alertStatus }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userFromStore = useSelector((store) => store.user);
+  const fetchProfile = async () => {
+    try {
+      const user = await fetch(BASE_URL + "/profile/view", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-            if(!user.ok){
-                if(user.status === 401){
-                    navigate("/login");
-                }
-                throw new Error("Failed to fetch profile");
-            }
-            const result = await user.json();
-            dispatch(addUser(result));
+      if (!user.ok) {
+        if (user.status === 401) {
+          navigate("/login");
         }
-        catch(err){
-            console.error(err.message);
-        }
+        throw new Error("Failed to fetch profile");
+      }
+      const result = await user.json();
+      dispatch(addUser(result));
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
-    useEffect(() => {
-        if(!userFromStore){
-            fetchProfile();
-        }
-    },[])
+  useEffect(() => {
+    if (!userFromStore) {
+      fetchProfile();
+    }
+  }, []);
 
-    return(
-        <>
-            <Header/>
-            <Outlet /> 
-            {/* <Footer /> */}
-        </>
-    )
+  return (
+    <>
+      <Header alertMessage={alertMessage} alertStatus={alertStatus} />
+      <Outlet />
+      {/* <Footer /> */}
+    </>
+  );
 }
 
 export default Body;

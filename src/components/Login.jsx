@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
 import { BASE_URL } from "../utils/Constant";
 
-function Login() {
+function Login({ setAlertMessage, setAlertStatus }) {
   const [email, setEmail] = useState("simran@gmail.com");
   const [password, setPassword] = useState("Simran@123");
   const navigate = useNavigate();
@@ -19,10 +19,19 @@ function Login() {
         credentials: "include",
       });
       const result = await data.json();
+
+      if(!data.ok){
+        throw new Error(result.message || "Error in login!");
+      }
+
       dispatch(addUser(result));
+      setAlertStatus("alert-success");
+      setAlertMessage("Login Successfully!");
       return navigate("/feed");
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      setAlertStatus("alert-error");
+      setAlertMessage(error.message);
+      console.error(error.message);
     }
   }
 

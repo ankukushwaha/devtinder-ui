@@ -4,7 +4,7 @@ import { BASE_URL } from "../utils/Constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
 
-function Editform({ user }) {
+function Editform({ user, setAlertMessage, setAlertStatus }) {
   const { firstName, lastName, age, about, imageUrl, gender, skills } = user;
   const dispatch = useDispatch();
 
@@ -34,8 +34,18 @@ function Editform({ user }) {
       });
 
       const result = await user.json();
+
+      if (!user.ok) {
+        // Backend sent error -> show error message
+        throw new Error(result.message || "Error in updating profile!");
+      }
+
       dispatch(addUser(result));
+      setAlertStatus("alert-success");
+      setAlertMessage("Profile updated Successfully!");
     } catch (error) {
+      setAlertStatus("alert-error");
+      setAlertMessage(error.message);
       console.error(error.message);
     }
   }
