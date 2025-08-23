@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import AppStore from "./utils/AppStore.js";
 import Feed from "./components/Feed.jsx";
 import Profile from "./components/Profile.jsx";
+import Friends from "./components/Friends.jsx";
 import { Provider } from "react-redux";
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 />
               }
             />
+            <Route path="/friends" element={<Friends />} />
           </Route>
         </Routes>
       </BrowserRouter>

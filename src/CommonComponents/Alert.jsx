@@ -1,7 +1,6 @@
 import React from "react";
 
 function Alert({alertMessage, alertStatus}) {
-  console.log(alertStatus);
   return (
     <div role="alert" className={`alert ${alertStatus}`}>
       <svg

@@ -17,11 +17,12 @@ function Feed({ setAlertMessage, setAlertStatus }) {
         credentials: "include",
       });
 
+      const result = await data.json();
+
       if (!data.ok) {
-        throw new Error("Error in getting feed!");
+        throw new Error(result.message || "Error in getting feed!");
       }
 
-      const result = await data.json();
       dispatch(addFeed(result.users[0]));
     } catch (error) {
       setAlertStatus("alert-error");

@@ -3,14 +3,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/Constant";
 import { removeUser } from "../utils/UserSlice";
+import { removeFriend } from "../utils/FriendSlice";
+import { removeFeed } from "../utils/FeedSlice";
 import Alert from "../CommonComponents/Alert";
 
 function Header({ alertMessage, alertStatus }) {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log(alertMessage);
 
   const handleLogout = async () => {
     try {
@@ -25,6 +25,8 @@ function Header({ alertMessage, alertStatus }) {
       }
 
       dispatch(removeUser());
+      dispatch(removeFriend());
+      dispatch(removeFeed());
       navigate("/login");
     } catch (error) {
       console.error(error.message);
@@ -35,7 +37,7 @@ function Header({ alertMessage, alertStatus }) {
     <>
       <div className="navbar bg-base-300 shadow-sm mb-2">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">DevTinder</a>
+          <Link to="/feed" className="btn btn-ghost text-xl">DevTinder</Link>
         </div>
         {user && user.imageUrl && (
           <div className="flex gap-2 items-center">
@@ -64,7 +66,10 @@ function Header({ alertMessage, alertStatus }) {
                   </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to="/friends">Friends</Link>
+                </li>
+                <li>
+                  <Link to="/requests">Requests</Link>
                 </li>
                 <li>
                   <Link onClick={handleLogout}>Logout</Link>
