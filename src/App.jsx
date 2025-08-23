@@ -8,6 +8,7 @@ import Feed from "./components/Feed.jsx";
 import Profile from "./components/Profile.jsx";
 import Friends from "./components/Friends.jsx";
 import { Provider } from "react-redux";
+import Requests from "./components/Requests.jsx";
 
 function App() {
   const [alertMessage, setAlertMessage] = useState("");
@@ -24,10 +25,7 @@ function App() {
           <Route
             path="/"
             element={
-              <Body
-                alertMessage={alertMessage}
-                alertStatus={alertStatus}
-              />
+              <Body alertMessage={alertMessage} alertStatus={alertStatus} />
             }
           >
             <Route
@@ -67,6 +65,15 @@ function App() {
               }
             />
             <Route path="/friends" element={<Friends />} />
+            <Route
+              path="/requests"
+              element={
+                <Requests
+                  setAlertMessage={setAlertMessage}
+                  setAlertStatus={setAlertStatus}
+                />
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

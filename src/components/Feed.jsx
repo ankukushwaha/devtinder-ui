@@ -23,6 +23,7 @@ function Feed({ setAlertMessage, setAlertStatus }) {
         throw new Error(result.message || "Error in getting feed!");
       }
 
+      console.log(result);
       dispatch(addFeed(result.users[0]));
     } catch (error) {
       setAlertStatus("alert-error");
