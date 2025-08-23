@@ -23,8 +23,7 @@ function Feed({ setAlertMessage, setAlertStatus }) {
         throw new Error(result.message || "Error in getting feed!");
       }
 
-      console.log(result);
-      dispatch(addFeed(result.users[0]));
+      dispatch(addFeed(result.users));
     } catch (error) {
       setAlertStatus("alert-error");
       setAlertMessage(error.message);
@@ -36,10 +35,18 @@ function Feed({ setAlertMessage, setAlertStatus }) {
     feedData();
   }, []);
 
+  if(!dataFromStore) return;
+  if(dataFromStore.length === 0) return (
+      <h1 className="flex justify-center my-20 font-bold text-3xl">
+        No Users Found.
+      </h1>
+  );
+
+
   return (
     dataFromStore && (
       <>
-        <UserCard user={dataFromStore} />
+        <UserCard user={dataFromStore[0]} />
       </>
     )
   );
