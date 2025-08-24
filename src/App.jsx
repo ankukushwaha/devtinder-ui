@@ -16,7 +16,7 @@ function App() {
 
   setInterval(() => {
     setAlertMessage("");
-  }, 3000);
+  }, 5000);
 
   return (
     <Provider store={AppStore}>

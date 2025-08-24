@@ -8,13 +8,13 @@ function Editform({ user, setAlertMessage, setAlertStatus }) {
   const { firstName, lastName, age, about, imageUrl, gender, skills } = user;
   const dispatch = useDispatch();
 
-  const [Name, setName] = useState(firstName);
-  const [LastName, setLastName] = useState(lastName);
-  const [Age, setAge] = useState(age);
-  const [Gender, setGender] = useState(gender);
-  const [About, setAbout] = useState(about);
-  const [Skills, setSkills] = useState(skills);
-  const [image, setImage] = useState(imageUrl);
+  const [Name, setName] = useState(firstName || "");
+  const [LastName, setLastName] = useState(lastName || "");
+  const [Age, setAge] = useState(age || 0);
+  const [Gender, setGender] = useState(gender || "");
+  const [About, setAbout] = useState(about || "");
+  const [Skills, setSkills] = useState(skills || []);
+  const [image, setImage] = useState(imageUrl || "");
 
   async function handleSave() {
     try {

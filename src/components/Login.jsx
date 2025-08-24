@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
 import { BASE_URL } from "../utils/Constant";
@@ -58,9 +58,11 @@ function Login({ setAlertMessage, setAlertStatus }) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="btn btn-neutral mt-4" onClick={handleClick}>
+        <button className="btn btn-neutral m-4" onClick={handleClick}>
           Login
         </button>
+
+        <Link to="/signup">New User then signup</Link>
       </fieldset>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/Constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/FeedSlice";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 
 function Feed({ setAlertMessage, setAlertStatus }) {
   const dispatch = useDispatch();
