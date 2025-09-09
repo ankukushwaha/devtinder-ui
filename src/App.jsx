@@ -20,7 +20,7 @@ function App() {
 
   return (
     <Provider store={AppStore}>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route
             path="/"
