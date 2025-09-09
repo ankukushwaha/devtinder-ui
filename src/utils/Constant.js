@@ -1,2 +1,2 @@
 export const BASE_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : 
-window.location.hostname + "/api";
+"http://13.48.149.226/api";
